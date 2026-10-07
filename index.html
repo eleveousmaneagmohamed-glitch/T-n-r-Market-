@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07111f">
+<meta name="description" content="Ténéré Market — marché, emplois, enseignement, bibliothèque, culture et communautés.">
+<link rel="icon" type="image/png" href="logo.png">
+<title>Ténéré Market — Ténéré Market</title>
+<style>
+:root{
+  --bg:#050b14; --panel:#0c1726; --panel2:#101f32; --gold:#f6c84a;
+  --gold2:#ffdf72; --text:#f5f7fb; --muted:#aab6c6; --line:#23344a;
+  --blue:#1478ff; --green:#23c55e; --red:#ef4444;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:
+radial-gradient(circle at 50% -10%,#12365c 0,#07111f 38%,#050b14 75%);color:var(--text)}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
+.container{width:min(1160px,92%);margin:auto}
+header{position:sticky;top:0;z-index:50;background:rgba(5,11,20,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(246,200,74,.16)}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.6px}
+.brand img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.brand span{color:var(--gold)}
+nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+nav a{padding:9px 11px;border-radius:10px;color:#dbe5f1;font-size:14px}
+nav a:hover{background:#132238;color:var(--gold2)}
+.menu{display:none;background:#132238;color:white;border:1px solid var(--line);padding:9px 12px;border-radius:10px}
+
+.hero{padding:55px 0 35px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}
+.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid #5c4b1e;background:#17170f;color:var(--gold2);padding:7px 12px;border-radius:999px;font-size:13px;font-weight:700}
+h1{font-size:clamp(42px,7vw,78px);line-height:.94;margin:18px 0 14px;letter-spacing:-3px}
+.gradient{background:linear-gradient(90deg,#fff,#ffdc64,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:18px;line-height:1.65;color:var(--muted);max-width:680px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{border:0;border-radius:12px;padding:12px 17px;font-weight:800;cursor:pointer}
+.primary{background:linear-gradient(135deg,var(--gold),#ff9e2c);color:#111}
+.secondary{background:#122136;color:#e9eef6;border:1px solid var(--line)}
+.logo-card{background:linear-gradient(145deg,#0c1726,#07101c);border:1px solid rgba(246,200,74,.25);padding:14px;border-radius:28px;box-shadow:0 25px 80px #0008}
+.logo-card img{display:block;width:100%;border-radius:20px}
+
+.section{padding:55px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px}
+.section h2{font-size:32px;margin:0 0 6px}
+.section-head p{color:var(--muted);margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.card{background:linear-gradient(145deg,#0d1928,#0a1421);border:1px solid var(--line);border-radius:18px;padding:20px;transition:.2s}
+.card:hover{transform:translateY(-3px);border-color:#5b4a21}
+.icon{font-size:30px;margin-bottom:12px}
+.card h3{margin:0 0 8px}
+.card p{margin:0;color:var(--muted);line-height:1.55}
+.tag{display:inline-block;margin-top:13px;padding:5px 9px;border-radius:999px;background:#15243a;color:#cdd8e7;font-size:12px}
+
+.region{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.region button{cursor:pointer;text-align:left;background:#0c1827;color:white;border:1px solid var(--line);border-radius:14px;padding:16px}
+.region button:hover{border-color:var(--gold);background:#101f32}
+.region strong{display:block;color:var(--gold2);margin-bottom:4px}
+
+.create{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.form{background:#0c1726;border:1px solid var(--line);border-radius:18px;padding:22px}
+label{display:block;color:#cfd9e7;font-size:13px;font-weight:700;margin:13px 0 7px}
+input,select,textarea{width:100%;padding:12px;background:#07111f;border:1px solid #263950;border-radius:10px;color:white;outline:none}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+.feed{display:grid;gap:12px}
+.post{display:flex;gap:14px;align-items:flex-start;background:#0b1725;border:1px solid var(--line);border-radius:16px;padding:16px}
+.avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#18365c,#e5ad33);font-weight:900;color:#08101a}
+.post small{color:#8090a5}
+
+.economy{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{padding:20px;border-radius:16px;background:#0c1827;border:1px solid var(--line)}
+.stat b{font-size:28px;color:var(--gold2);display:block}
+.stat span{color:var(--muted);font-size:13px}
+
+footer{border-top:1px solid var(--line);padding:35px 0 50px;color:var(--muted)}
+.footer-brand{display:flex;align-items:center;gap:12px}
+.footer-brand img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.footer-grid{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.toast{position:fixed;right:18px;bottom:18px;z-index:100;background:#102238;border:1px solid var(--gold);color:#fff;padding:13px 16px;border-radius:12px;box-shadow:0 15px 45px #0008;display:none}
+.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:90;padding:18px}
+.modal-box{width:min(520px,100%);background:#0c1726;border:1px solid var(--gold);border-radius:18px;padding:24px}
+.close{float:right;background:transparent;border:0;color:#fff;font-size:25px;cursor:pointer}
+
+
+.history-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.timeline-card{position:relative;padding:22px;border:1px solid var(--line);background:linear-gradient(145deg,#0c192a,#091321);border-radius:16px}
+.timeline-card .year{display:inline-block;color:var(--gold2);font-weight:800;font-size:13px;margin-bottom:8px}
+.timeline-card h3{margin:0 0 8px}.timeline-card p{color:var(--muted);line-height:1.65;margin:0}
+.history-note{margin-top:18px;padding:16px;border-left:3px solid var(--gold);background:#0b1726;border-radius:10px;color:#cbd5e1;line-height:1.65}
+@media(max-width:700px){.history-grid{grid-template-columns:1fr}}
+@media(max-width:850px){
+  .hero-grid,.create{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .region{grid-template-columns:repeat(2,1fr)}
+  .economy{grid-template-columns:repeat(2,1fr)}
+  nav{display:none;position:absolute;left:4%;right:4%;top:72px;background:#07111f;border:1px solid var(--line);padding:10px;border-radius:14px}
+  nav.open{display:flex;flex-direction:column}
+  nav a{padding:12px}
+  .menu{display:block}
+}
+@media(max-width:520px){
+  .grid,.region,.economy{grid-template-columns:1fr}
+  .hero{padding-top:35px}
+  h1{letter-spacing:-2px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="#accueil">
+      <img src="logo.png" alt="Logo Ténéré Market">
+      <span>Ténéré Market</span>
+    </a>
+    <button class="menu" onclick="toggleMenu()">☰ Menu</button>
+    <nav id="nav">
+<a href="#diagnostic">🧭 Diagnostic</a>
+      <a href="#accueil">Accueil</a><a href="#communautes">Communautés</a>
+      <a href="#marche">Marché</a><a href="#emplois">Emplois</a>
+      <a href="#enseignement">Enseignement</a><a href="#histoire">Histoire</a><a href="#culture">Culture</a>
+      <a href="#creer">Créer</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="accueil">
+  <div class="container hero-grid">
+    <div>
+      <div class="badge">🌍 Un seul espace • Plusieurs communautés • Un même avenir</div>
+      <h1><span class="gradient">TÉNÉRÉ<br>MARKET</span></h1>
+      <p><b>Ténéré Market.</b><br>
+      Un espace pour communiquer, apprendre, travailler, vendre, acheter, transmettre la culture et créer des opportunités entre les communautés touarègues.</p>
+      <div class="actions">
+        <a class="btn primary" href="#communautes">🌍 Explorer les communautés</a>
+        <button class="btn secondary" onclick="openModal()">➕ Créer une publication</button>
+      </div>
+    </div>
+    <div class="logo-card"><img src="logo.png" alt="Identité visuelle Ténéré Market"></div>
+  </div>
+</section>
+
+<section class="section" id="communautes">
+<div class="container">
+  <div class="section-head"><div><h2>🌍 Communautés régionales</h2><p>Pays → Région → Ville → Communauté</p></div></div>
+  <div class="region">
+    <button onclick="selectRegion('Dubaï — Émirats arabes unis')"><strong>🇦🇪 Dubaï</strong>Grand marché international</button>
+    <button onclick="selectRegion('Arabie Saoudite')"><strong>🇸🇦 Arabie Saoudite</strong>Marchés du Golfe</button>
+    <button onclick="selectRegion('Yémen')"><strong>🇾🇪 Yémen</strong>Marchés et échanges</button>
+    <button onclick="selectRegion('Maroc')"><strong>🇲🇦 Maroc</strong>Marchés d’Afrique du Nord</button>
+    <button onclick="selectRegion('Libye')"><strong>🇱🇾 Libye</strong>Tripoli • Benghazi • Oubary</button>
+    <button onclick="selectRegion('Algérie')"><strong>🇩🇿 Algérie</strong>Marchés sahariens</button>
+    <button onclick="selectRegion('Niger')"><strong>🇳🇪 Niger</strong>Marchés sahéliens</button>
+    <button onclick="selectRegion('Tunisie')"><strong>🇹🇳 Tunisie</strong>Marchés d’Afrique du Nord</button>
+  </div>
+</div>
+</section>
+<section class="section" id="grands-marches">
+<div class="container">
+  <div class="section-head">
+    <div><h2>🌍 Grands marchés Ténéré</h2><p>Connecter progressivement les acheteurs, vendeurs et entrepreneurs de ces marchés.</p></div>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="icon">🇦🇪</div><h3>Dubaï</h3><p>Commerce international, grossistes, logistique et opportunités commerciales.</p></div>
+    <div class="card"><div class="icon">🇸🇦</div><h3>Arabie Saoudite</h3><p>Marchés, entreprises et échanges commerciaux.</p></div>
+    <div class="card"><div class="icon">🇾🇪</div><h3>Yémen</h3><p>Commerce régional et connexions avec les marchés arabes.</p></div>
+    <div class="card"><div class="icon">🇲🇦</div><h3>Maroc</h3><p>Marchés nord-africains et commerce régional.</p></div>
+    <div class="card"><div class="icon">🇱🇾</div><h3>Libye</h3><p>Tripoli, Benghazi, Oubary et réseaux commerciaux.</p></div>
+    <div class="card"><div class="icon">🇩🇿</div><h3>Algérie</h3><p>Grands marchés et échanges transsahariens.</p></div>
+    <div class="card"><div class="icon">🇳🇪</div><h3>Niger</h3><p>Commerce sahélien et réseaux de proximité.</p></div>
+    <div class="card"><div class="icon">🇹🇳</div><h3>Tunisie</h3><p>Marchés méditerranéens et nord-africains.</p></div>
+  </div>
+</div>
+</section>
+
+
+<section class="section" id="histoire">
+  <div class="section-head">
+    <div><h2>🏜️ Histoire & héritage des Touaregs</h2><p>Une mémoire à transmettre aux nouvelles générations.</p></div>
+  </div>
+  <div class="history-grid">
+    <div class="timeline-card"><span class="year">🌍 Sahara ancien</span><h3>Des peuples du désert</h3><p>Les populations touarègues se sont inscrites dans l'histoire du Sahara et du Sahel, entre espaces de circulation, campements, oasis et routes commerciales.</p></div>
+    <div class="timeline-card"><span class="year">👑 Traditions d'origine</span><h3>Tin Hinan</h3><p>Dans la tradition orale touarègue, Tin Hinan est présentée comme une ancêtre prestigieuse associée au Hoggar. Cette tradition doit être distinguée des faits historiques établis.</p></div>
+    <div class="timeline-card"><span class="year">✍️ Langue & écriture</span><h3>Tamasheq & Tifinagh</h3><p>La langue et l'écriture tifinagh constituent des éléments importants de l'identité culturelle. Leur transmission peut aujourd'hui être renforcée par le numérique.</p></div>
+    <div class="timeline-card"><span class="year">🐪 Routes du Sahara</span><h3>Commerce & mobilité</h3><p>Les échanges caravaniers ont relié différentes régions du Sahara. Des villes comme Agadez ont été des carrefours commerciaux et culturels importants.</p></div>
+    <div class="timeline-card"><span class="year">🎵 Patrimoine vivant</span><h3>Imzad, poésie & oralité</h3><p>La musique de l'imzad, la poésie, les récits, les proverbes et les chants ont longtemps participé à la transmission de la mémoire entre générations.</p></div>
+    <div class="timeline-card"><span class="year">🧿 Aujourd'hui</span><h3>Préserver et transmettre</h3><p>Ténéré Market veut créer un espace numérique où les anciens, les enseignants, les chercheurs et les jeunes peuvent documenter, apprendre et partager cet héritage.</p></div>
+  </div>
+  <div class="history-note"><strong>📚 Méthode :</strong> cette rubrique distingue les traditions orales, les témoignages culturels et les éléments historiques documentés. Les utilisateurs pourront ajouter des sources, des récits familiaux, des photos, des audios et des documents pour enrichir progressivement l'archive communautaire.</div>
+  <div class="history-note"><strong>✍️ Créé par Ousmane AG Mohamed — Ténéré Market.</strong> Objectif : faire de la plateforme une bibliothèque vivante de la mémoire, des langues, des savoirs et des cultures touarègues.</div>
+</section>
+<section class="section" id="marche">
+<div class="container">
+  <div class="section-head"><div><h2>🛍️ Le grand espace TÉNÉRÉ</h2><p>Les fonctions principales du projet réunies dans un seul site.</p></div></div>
+  <div class="grid">
+    <div class="card"><div class="icon">🛒</div><h3>Marché</h3><p>Produits, services, achat et vente entre membres.</p><span class="tag">Commerce</span></div>
+    <div class="card" id="emplois"><div class="icon">💼</div><h3>Emplois</h3><p>Opportunités, candidatures, annonces et services professionnels.</p><span class="tag">Travail</span></div>
+    <div class="card" id="enseignement"><div class="icon">🎓</div><h3>Enseignement</h3><p>Cours, formations, apprentissage et partage de compétences.</p><span class="tag">Éducation</span></div>
+    <div class="card"><div class="icon">📚</div><h3>Bibliothèque</h3><p>Livres, documents, ressources et connaissances numériques.</p><span class="tag">Savoir</span></div>
+    <div class="card" id="culture"><div class="icon">🧿</div><h3>Culture</h3><p>Traditions, langue, identité, histoire, musique, poésie, artisanat et patrimoine.</p><span class="tag">Patrimoine</span></div>
+    <div class="card"><div class="icon">💬</div><h3>Messages</h3><p>Discussions et appels entre membres de la communauté.</p><span class="tag">Communication</span></div>
+    <div class="card"><div class="icon">🔔</div><h3>Notifications</h3><p>Recevoir les nouveautés, réponses, offres et activités.</p><span class="tag">Actualités</span></div>
+    <div class="card"><div class="icon">🛡️</div><h3>Sécurité</h3><p>Modération, signalement et protection progressive des utilisateurs.</p><span class="tag">Confiance</span></div>
+    <div class="card"><div class="icon">⚙️</div><h3>Administration</h3><p>Gestion des communautés, annonces et règles de la plateforme.</p><span class="tag">Gestion</span></div>
+  </div>
+</div>
+</section>
+
+
+<section class="section" id="cv">
+<div class="container">
+  <div class="section-head">
+    <div>
+      <h2>📄 Créateur de CV</h2>
+      <p>Créer un CV professionnel directement depuis le téléphone, sans logiciel compliqué.</p>
+    </div>
+  </div>
+  <div class="create">
+    <div class="form">
+      <label>Nom complet</label>
+      <input id="cvName" placeholder="Ex. Ousmane AG Mohamed">
+      <label>Téléphone / Email</label>
+      <input id="cvContact" placeholder="Téléphone • Email">
+      <label>Profil professionnel</label>
+      <input id="cvProfile" placeholder="Ex. Agent administratif, marketing digital...">
+      <label>Compétences</label>
+      <textarea id="cvSkills" placeholder="Ex. Saisie de données, Word, Excel, traduction..."></textarea>
+      <label>Expériences / projets</label>
+      <textarea id="cvExperience" placeholder="Décris tes expériences, projets ou activités..."></textarea>
+      <button class="btn primary" onclick="generateCV()">✨ Générer mon CV</button>
+    </div>
+    <div class="form" id="cvPreview">
+      <div style="display:flex;gap:14px;align-items:center">
+        <img src="logo.png" alt="" style="width:62px;height:62px;border-radius:50%;object-fit:cover">
+        <div><h2 id="previewName" style="margin:0">Ton CV TÉNÉRÉ</h2><small id="previewContact" style="color:var(--muted)">Aperçu professionnel</small></div>
+      </div>
+      <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+      <h3 id="previewProfile">Profil professionnel</h3>
+      <p id="previewSkills" style="white-space:pre-line;color:var(--muted)">Tes compétences apparaîtront ici.</p>
+      <h3>Expériences / projets</h3>
+      <p id="previewExperience" style="white-space:pre-line;color:var(--muted)">Tes expériences apparaîtront ici.</p>
+      <button class="btn secondary" onclick="printCV()">🖨️ Imprimer / enregistrer en PDF</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section" id="chine">
+<div class="container">
+  <div class="section-head">
+    <div>
+      <h2>🇨🇳 Ténéré Market — Commerce international</h2>
+      <p>Un pont entre les entrepreneurs touaregs et les grands marchés de fournisseurs internationaux.</p>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🔎</div><h3>Recherche de fournisseurs</h3>
+      <p>Rechercher des produits, comparer des fournisseurs et préparer une demande de devis.</p>
+      <a class="tag" href="https://www.alibaba.com/" target="_blank" rel="noopener">Alibaba.com ↗</a>
+    </div>
+    <div class="card">
+      <div class="icon">🏭</div><h3>Fabricants chinois</h3>
+      <p>Explorer des fabricants et fournisseurs B2B pour vêtements, électronique, machines, accessoires et autres catégories.</p>
+      <a class="tag" href="https://www.made-in-china.com/" target="_blank" rel="noopener">Made-in-China ↗</a>
+    </div>
+    <div class="card">
+      <div class="icon">🌐</div><h3>Global sourcing</h3>
+      <p>Découvrir des fournisseurs, salons et possibilités de mise en relation internationale.</p>
+      <a class="tag" href="https://www.globalsources.com/" target="_blank" rel="noopener">Global Sources ↗</a>
+    </div>
+    <div class="card">
+      <div class="icon">🧾</div><h3>Demande de devis</h3>
+      <p>Préparer une fiche claire : produit, quantité, budget, destination, personnalisation et délai.</p>
+      <button class="btn secondary" onclick="openSourcing()">Créer une demande</button>
+    </div>
+    <div class="card">
+      <div class="icon">🚚</div><h3>Import & logistique</h3>
+      <p>Comparer les options de transport et suivre les étapes : fournisseur → paiement → expédition → réception.</p>
+      <span class="tag">À connecter au backend</span>
+    </div>
+    <div class="card">
+      <div class="icon">🤝</div><h3>Relations commerciales</h3>
+      <p>Créer des profils professionnels et préparer des messages de négociation en français, arabe, anglais ou chinois.</p>
+      <span class="tag">Assistant commercial</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+  <div class="section-head">
+    <div><h2>✨ Outils simples mais puissants</h2><p>Des fonctions quotidiennes qui donnent envie de revenir sur Ténéré Market.</p></div>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="icon">🧮</div><h3>Calculateur de marge</h3><p>Prix d'achat + transport + autres coûts → prix conseillé et marge estimée.</p><button class="btn secondary" onclick="openMargin()">Calculer</button></div>
+    <div class="card"><div class="icon">🗣️</div><h3>Assistant de message</h3><p>Préparer un message professionnel pour un client, fournisseur ou recruteur.</p><button class="btn secondary" onclick="openMessage()">Rédiger</button></div>
+    <div class="card"><div class="icon">📋</div><h3>Mini profil professionnel</h3><p>Présenter rapidement une personne, une activité ou une entreprise.</p><button class="btn secondary" onclick="toast('Profil professionnel : fonction prévue dans la prochaine version ✓')">Créer</button></div>
+    <div class="card"><div class="icon">⭐</div><h3>Confiance & avis</h3><p>À terme : évaluations, vérification des profils et historique des transactions.</p><span class="tag">Sécurité</span></div>
+  </div>
+</div>
+</section>
+
+<section class="section" id="creer">
+<div class="container">
+  <div class="section-head"><div><h2>➕ Créer</h2><p>Le prototype permet déjà de préparer différents types de contenus.</p></div></div>
+  <div class="create">
+    <div class="form">
+      <label>Type de contenu</label>
+      <select id="type"><option>Publication</option><option>Produit</option><option>Service</option><option>Emploi</option><option>Cours</option><option>Livre</option></select>
+      <label>Titre</label>
+      <input id="title" placeholder="Ex. Produit artisanal touareg">
+      <label>Description</label>
+      <textarea id="description" placeholder="Écris quelques informations..."></textarea>
+      <button class="btn primary" style="margin-top:14px" onclick="publish()">Publier dans le prototype</button>
+    </div>
+    <div class="feed" id="feed">
+      <div class="post"><div class="avatar">TM</div><div><b>Bienvenue sur Ténéré Market</b><br><small>Prototype — première version</small><p>Ousmane AG Mohamed → 🇱🇾 Libye → Oubary → Touaregs d’Oubary.</p></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section" id="diagnostic">
+<div class="container">
+  <div class="section-head">
+    <div><h2>🧭 Diagnostic de Ténéré Market</h2><p>Nos forces, nos limites et le plan pour transformer le projet en entreprise durable.</p></div>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="icon">💪</div><h3>Nos qualités</h3><p><b>Vision large :</b> commerce, emploi, éducation, culture et communauté dans un même espace.</p><p><b>Identité forte :</b> patrimoine touareg, langues, Tifinagh et ouverture internationale.</p><p><b>Accessibilité :</b> pensée d'abord pour le téléphone et pour des utilisateurs ayant peu de moyens.</p><p><b>Créateur identifié :</b> Ousmane AG Mohamed porte la vision et la cohérence du projet.</p></div>
+    <div class="card"><div class="icon">⚠️</div><h3>Nos défauts actuels</h3><p><b>Prototype :</b> plusieurs fonctions sont encore des démonstrations.</p><p><b>Pas encore de backend :</b> comptes, données, commandes et messages ne sont pas encore réellement centralisés.</p><p><b>Confiance à construire :</b> vérification des vendeurs, avis, lutte contre les arnaques et modération doivent être renforcés.</p><p><b>Ressources limitées :</b> le développement doit avancer par étapes pour éviter des coûts trop élevés.</p></div>
+    <div class="card"><div class="icon">🚀</div><h3>Nos opportunités</h3><p>Créer un réseau régional puis international reliant communautés, commerçants, enseignants, étudiants, chercheurs et chercheurs d'emploi.</p><p>Développer des services numériques, des formations, des vitrines professionnelles et des commissions commerciales.</p><p>Construire une grande archive numérique de la culture et des savoirs touaregs.</p></div>
+    <div class="card"><div class="icon">🛡️</div><h3>Nos risques</h3><p>Fraudes, faux comptes, produits interdits ou contrefaits, litiges commerciaux, problèmes de paiement et protection des données.</p><p>Risque de dispersion si trop de fonctionnalités sont lancées en même temps.</p><p>Risque de perte de confiance si les règles, la modération et le support ne sont pas solides.</p></div>
+    <div class="card"><div class="icon">🎯</div><h3>Priorité 1 — Confiance</h3><p>Mettre en place inscription sécurisée, profils vérifiés, signalement, règles du marché, avis, historique des transactions et support.</p><span class="tag">Priorité absolue</span></div>
+    <div class="card"><div class="icon">🏗️</div><h3>Priorité 2 — Technologie</h3><p>Passer du prototype à un backend avec base de données, authentification, stockage, API, messagerie et notifications.</p><span class="tag">Construction</span></div>
+    <div class="card"><div class="icon">💼</div><h3>Priorité 3 — Revenus</h3><p>Commencer avec des services simples : vitrines professionnelles, mise en avant d'annonces, services numériques et commissions sur transactions réussies.</p><span class="tag">Modèle progressif</span></div>
+    <div class="card"><div class="icon">🌍</div><h3>Priorité 4 — Expansion</h3><p>Commencer par une communauté pilote, mesurer l'usage, améliorer le produit, puis ouvrir progressivement les autres pays et grands marchés.</p><span class="tag">Étape par étape</span></div>
+  </div>
+  <div class="history-note"><strong>📌 Principe de développement :</strong> ne pas chercher à tout construire en même temps. Ténéré Market doit d'abord être simple, fiable et utile, puis devenir progressivement une plateforme complète.</div>
+  <div class="history-note"><strong>👤 Vision du créateur :</strong> Ousmane AG Mohamed — construire un espace numérique où l'on peut apprendre, travailler, entreprendre, acheter, vendre, transmettre et préserver les connaissances.</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+  <div class="section-head"><div><h2>💰 Modèle économique</h2><p>Une plateforme conçue pour évoluer progressivement.</p></div></div>
+  <div class="economy">
+    <div class="stat"><b>0 MRU</b><span>Prototype et hébergement initial possibles gratuitement</span></div>
+    <div class="stat"><b>PASS</b><span>PASS TOUAREG MONDE</span></div>
+    <div class="stat"><b>%</b><span>Commissions sur transactions réussies</span></div>
+    <div class="stat"><b>PRO</b><span>Abonnements et annonces professionnelles</span></div>
+  </div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container footer-grid">
+  <div><b style="color:var(--gold2)">Ténéré Market</b><br>Ténéré Market.</div>
+  <div>Français • العربية • English • Tifinagh</div>
+  <div>© 2026 Ténéré Market</div>
+</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal" id="sourcingModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeSourcing()">×</button>
+    <h2>🇨🇳 Demande de sourcing</h2>
+    <label>Produit recherché</label><input id="sProduct" placeholder="Ex. T-shirts, montres, accessoires">
+    <label>Quantité</label><input id="sQty" type="number" min="1" placeholder="100">
+    <label>Pays de livraison</label><input id="sCountry" placeholder="Ex. Mauritanie">
+    <label>Budget indicatif</label><input id="sBudget" placeholder="Ex. 5 000 MRU">
+    <label>Détails</label><textarea id="sDetails" placeholder="Qualité, couleur, personnalisation, délai..."></textarea>
+    <button class="btn primary" onclick="makeSourcingRequest()">📋 Préparer la demande</button>
+    <div id="sourcingResult" style="margin-top:14px;color:var(--muted)"></div>
+  </div>
+</div>
+
+<div class="modal" id="marginModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeMargin()">×</button>
+    <h2>🧮 Calculateur de marge</h2>
+    <label>Prix d'achat</label><input id="mBuy" type="number" min="0" placeholder="0">
+    <label>Transport / frais</label><input id="mShip" type="number" min="0" placeholder="0">
+    <label>Prix de vente souhaité</label><input id="mSell" type="number" min="0" placeholder="0">
+    <button class="btn primary" onclick="calcMargin()">Calculer</button>
+    <p id="marginResult" style="color:var(--gold2);font-weight:800"></p>
+  </div>
+</div>
+
+<div class="modal" id="messageModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeMessage()">×</button>
+    <h2>🗣️ Assistant de message</h2>
+    <label>Destinataire</label><input id="msgTo" placeholder="Client, fournisseur, recruteur...">
+    <label>Objet</label><input id="msgSubject" placeholder="Demande de prix, candidature...">
+    <label>Langue</label><select id="msgLang"><option>Français</option><option>English</option><option>العربية</option><option>中文</option></select>
+    <button class="btn primary" onclick="generateMessage()">✨ Générer</button>
+    <textarea id="msgResult" style="margin-top:14px;min-height:170px" readonly></textarea>
+  </div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal()">×</button>
+    <h2>➕ Nouvelle publication</h2>
+    <p style="color:var(--muted)">Le formulaire complet sera connecté à une base de données dans la prochaine étape.</p>
+    <button class="btn primary" onclick="closeModal();document.querySelector('#creer').scrollIntoView()">Commencer</button>
+  </div>
+</div>
+
+<script>
+function toggleMenu(){document.getElementById('nav').classList.toggle('open')}
+function toast(msg){
+  const t=document.getElementById('toast'); t.textContent=msg; t.style.display='block';
+  setTimeout(()=>t.style.display='none',2500);
+}
+function selectRegion(region){toast('Communauté sélectionnée : '+region)}
+function openModal(){document.getElementById('modal').style.display='flex'}
+function closeModal(){document.getElementById('modal').style.display='none'}
+function publish(){
+  const type=document.getElementById('type').value;
+  const title=document.getElementById('title').value.trim() || 'Nouvelle publication';
+  const desc=document.getElementById('description').value.trim() || 'Contenu ajouté au prototype Ténéré Market.';
+  const feed=document.getElementById('feed');
+  const post=document.createElement('div');
+  post.className='post';
+  post.innerHTML='<div class="avatar">OA</div><div><b>'+escapeHtml(title)+'</b><br><small>'+escapeHtml(type)+' • Prototype</small><p>'+escapeHtml(desc)+'</p></div>';
+  feed.prepend(post);
+  document.getElementById('title').value='';
+  document.getElementById('description').value='';
+  toast('Publication ajoutée au prototype ✓');
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+
+function generateCV(){
+  const name=document.getElementById('cvName').value.trim()||'Nom du candidat';
+  const contact=document.getElementById('cvContact').value.trim()||'Téléphone • Email';
+  const profile=document.getElementById('cvProfile').value.trim()||'Profil professionnel';
+  const skills=document.getElementById('cvSkills').value.trim()||'Compétences';
+  const exp=document.getElementById('cvExperience').value.trim()||'Expériences et projets';
+  document.getElementById('previewName').textContent=name;
+  document.getElementById('previewContact').textContent=contact;
+  document.getElementById('previewProfile').textContent=profile;
+  document.getElementById('previewSkills').textContent=skills;
+  document.getElementById('previewExperience').textContent=exp;
+  toast('CV généré dans l’aperçu ✓');
+}
+function printCV(){
+  const box=document.getElementById('cvPreview').innerHTML;
+  const w=window.open('','_blank');
+  w.document.write('<html><head><title>CV Ténéré Market</title><style>body{font-family:Arial;padding:35px;color:#111}h2{margin:0 0 5px}hr{border:0;border-top:1px solid #ddd;margin:20px 0}p{line-height:1.6;white-space:pre-line}.btn{display:none}</style></head><body>'+box+'</body></html>');
+  w.document.close(); w.print();
+}
+function openSourcing(){document.getElementById('sourcingModal').style.display='flex'}
+function closeSourcing(){document.getElementById('sourcingModal').style.display='none'}
+function makeSourcingRequest(){
+  const p=document.getElementById('sProduct').value.trim()||'Produit';
+  const q=document.getElementById('sQty').value.trim()||'à définir';
+  const c=document.getElementById('sCountry').value.trim()||'à définir';
+  const b=document.getElementById('sBudget').value.trim()||'à définir';
+  const d=document.getElementById('sDetails').value.trim()||'Aucun détail supplémentaire';
+  document.getElementById('sourcingResult').innerHTML='<b>Demande préparée ✓</b><br>'+escapeHtml(p)+' • Quantité : '+escapeHtml(q)+' • Destination : '+escapeHtml(c)+' • Budget : '+escapeHtml(b)+'<br>'+escapeHtml(d);
+}
+function openMargin(){document.getElementById('marginModal').style.display='flex'}
+function closeMargin(){document.getElementById('marginModal').style.display='none'}
+function calcMargin(){
+  const buy=Number(document.getElementById('mBuy').value)||0;
+  const ship=Number(document.getElementById('mShip').value)||0;
+  const sell=Number(document.getElementById('mSell').value)||0;
+  const cost=buy+ship, profit=sell-cost, margin=sell?profit/sell*100:0;
+  document.getElementById('marginResult').textContent='Coût total : '+cost.toFixed(2)+' • Bénéfice : '+profit.toFixed(2)+' • Marge : '+margin.toFixed(1)+'%';
+}
+function openMessage(){document.getElementById('messageModal').style.display='flex'}
+function closeMessage(){document.getElementById('messageModal').style.display='none'}
+function generateMessage(){
+  const to=document.getElementById('msgTo').value.trim()||'Madame, Monsieur';
+  const subject=document.getElementById('msgSubject').value.trim()||'Demande professionnelle';
+  const lang=document.getElementById('msgLang').value;
+  let msg='';
+  if(lang==='Français') msg='Bonjour '+to+',\n\nObjet : '+subject+'\n\nJe vous contacte au nom de Ténéré Market. Nous souhaitons échanger avec vous dans un cadre professionnel et fiable. Merci de nous indiquer vos conditions, prix, quantités minimales et délais.\n\nCordialement.';
+  else if(lang==='English') msg='Hello '+to+',\n\nSubject: '+subject+'\n\nI am contacting you through Ténéré Market. We would like to discuss a professional cooperation. Please send your prices, minimum order quantity, terms and delivery time.\n\nBest regards.';
+  else if(lang==='العربية') msg='مرحباً '+to+'،\n\nالموضوع: '+subject+'\n\nنتواصل معكم عبر Ténéré Market من أجل تعاون مهني. نرجو إرسال الأسعار والحد الأدنى للطلب وشروط التعاون ومدة التسليم.\n\nمع التحية.';
+  else msg='您好 '+to+'，\n\n主题：'+subject+'\n\n我们通过 Ténéré Market 与您联系，希望开展专业合作。请提供产品价格、最低起订量、合作条件和交货时间。\n\n谢谢。';
+  document.getElementById('msgResult').value=msg;
+}
+
+document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav').classList.remove('open')));
+</script>
+</body>
+</html>
